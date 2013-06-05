@@ -13,12 +13,12 @@
         , default: '%(name) 格式有错'
     }
 
-    var defaultOptions = {
+    , defaultOptions = {
         callback: function (v) { return [true, v] }
         , optional: false
     }
 
-    var Input = function ($element, fieldName, options) {
+    function Input($element, fieldName, options) {
         this.$element = $element
         this._messages = $.extend({}, defaultMessages)
         this._messageVars = {
@@ -95,8 +95,10 @@
         , r = this.checkValue(value)
         , valid = r[0]
         , m = r[3]
+
         if (valid && this.options.pass) this.options.pass.call(this.$element)
         else if (!valid && this.options.fail) this.options.fail.call(this.$element, m)
+
         return r
     }
 
@@ -109,10 +111,12 @@
             this._messageKey = 'max'
             return false
         }
+
         if (this._min && value < this._min) {
             this._messageKey = 'min'
             return false
         }
+
         return true
     }
 
@@ -276,17 +280,18 @@
     // main FormCheker class definition
     function FormChecker(element, options) {
         var that = this
+
         this.$element = $(element)
         this.options = $.extend({}, $.fn.formChecker.defaults, options)
         this.global = typeof options.global == 'object' && options.global
         this.form = this.options.formInput
         this.inputs = {}
+
         $.each(this.form, function (field, rawChecker) {
             var fieldName = rawChecker[0]
             , type = rawChecker[1]
             , checkerOption = rawChecker[2]
-
-            $input = that.$element.find(field)
+            , $input = that.$element.find(field)
 
             that.inputs[field] = new types[type](
                 $input, fieldName, $.extend({}, that.global, checkerOption))
@@ -299,17 +304,17 @@
         , messages = {}
         , $input
         , value
-        , r
-        , valid
-        , v
-        , m
         , that = this
 
         this._valid = true
 
         $.each(this.inputs, function (field, input) {
-            r = input.check()
+            var r
+            , valid
+            , v
+            , m
 
+            r = input.check()
             valid = r[0]
             rawData[field] = r[1]
             v = r[2]
