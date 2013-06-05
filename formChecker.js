@@ -1,16 +1,16 @@
 !function ($) {
 
     var defaultMessages = {
-        max: '%(name) ×î´óÖµÎª%(max)'
-        , min: '%(name) ×îĞ¡ÖµÎª%(min)'
-        , maxLen: '%(name) ×î´ó³¤¶ÈÎª%(maxLen)¸ö×Ö·û'
-        , minLen: '%(name) ×îĞ¡³¤¶ÈÎª%(minLen)¸ö×Ö·û'
-        , blank: '%(name) ²»ÄÜÎª¿Õ'
-        , callback: '%(name) ÊäÈë³ö´íÁË'
-        , format: '%(name) ¸ñÊ½ÓĞ´í'
-        , ascii: '%(name) ²»ÄÜ°üº¬ÖĞÎÄ'
-        , chinese: '%(name) ±ØĞëÊÇÖĞÎÄ'
-        , default: '%(name) ¸ñÊ½ÓĞ´í'
+        max: '%(name) æœ€å¤§å€¼ä¸º%(max)'
+        , min: '%(name) æœ€å°å€¼ä¸º%(min)'
+        , maxLen: '%(name) æœ€å¤§é•¿åº¦ä¸º%(maxLen)ä¸ªå­—ç¬¦'
+        , minLen: '%(name) æœ€å°é•¿åº¦ä¸º%(minLen)ä¸ªå­—ç¬¦'
+        , blank: '%(name) ä¸èƒ½ä¸ºç©º'
+        , callback: '%(name) è¾“å…¥å‡ºé”™äº†'
+        , format: '%(name) æ ¼å¼æœ‰é”™'
+        , ascii: '%(name) ä¸èƒ½åŒ…å«ä¸­æ–‡'
+        , chinese: '%(name) å¿…é¡»æ˜¯ä¸­æ–‡'
+        , default: '%(name) æ ¼å¼æœ‰é”™'
     }
 
     var defaultOptions = {
