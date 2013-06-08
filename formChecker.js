@@ -18,6 +18,27 @@
         , optional: false
     }
 
+    , _super = function (Child, obj) {
+        return $.proxy(Child._super, obj)
+    }
+
+    , _inherit = function (Child, Parent) {
+        Child.prototype = new Parent()
+        Child.prototype.constructor = Child
+        Child._super = Parent
+    }
+
+    , kformat = function (string, value) {
+        return string.replace(/%\(([^)]+)\)/g, function(match, name) { 
+            return typeof value[name] != 'undefined'
+                ? value[name]
+                : match
+        })
+    }
+
+    , types
+
+
     function Input($element, fieldName, options) {
         this.$element = $element
         this._messages = $.extend({}, defaultMessages)
@@ -85,7 +106,7 @@
             message = this._messages['blank']
 
         if (message)
-            message = message.kformat(this._messageVars)
+            message = kformat(message, this._messageVars)
 
         return [valid, raw, validData, message]
     }
@@ -123,12 +144,12 @@
 
     // Str Input
     function Str($input, fieldName, options) {
-        this.constructor.call(this, $input, fieldName, options)
+        _super(Str, this)($input, fieldName, options)
         this._format = this.options.format
         this._length = this.options.length || this._length
     }
 
-    Str.prototype = new Input()
+    _inherit(Str, Input)
 
     Str.prototype._check = function (value) {
         var message
@@ -145,20 +166,16 @@
     }
 
     Str.prototype._length = function (value) {
-        var s = 0
-        for(var i = 0; i < value.length; i++) {
-            s += value.charAt(i).match(/[\u0391-\uFFE5]/) ? 2 : 1
-        }
-        return s
+        return value.length
     }
 
 
     // ASCII Input
     function ASCII($input, fieldName, options) {
-        this.constructor.call(this, $input, fieldName, options)
+        _super(ASCII, this)($input, fieldName, options)
     }
 
-    ASCII.prototype = new Str()
+    _inherit(ASCII, Str)
 
     ASCII.prototype._check = function (value) {
         var message
@@ -178,17 +195,13 @@
         return [true, value]
     }
 
-    ASCII.prototype._length = function (value) {
-        return value.length
-    }
-
     
     // Chinese Input
     function Chinese($input, fieldName, options) {
-        this.constructor.call(this, $input, fieldName, options)
+        _super(Chinese, this)($input, fieldName, options)
     }
 
-    Chinese.prototype = new Str()
+    _inherit(Chinese, Str)
 
     Chinese.prototype._check = function (value) {
         var message
@@ -211,10 +224,10 @@
 
     // Email Input
     function Email($input, fieldName, options) {
-        this.constructor.call(this, $input, fieldName, options)
+        _super(Email, this)($input, fieldName, options)
     }
 
-    Email.prototype = new Str()
+    _inherit(Email, Str)
 
     Email.prototype._check = function (value) {
         if (!this._checkMM(this._length(value))) {
@@ -231,10 +244,10 @@
 
     // Int Input
     function Int($input, fieldName, options) {
-        this.constructor.call(this, $input, fieldName, options)
+        _super(Int, this)($input, fieldName, options)
     }
 
-    Int.prototype = new Input()
+    _inherit(Int, Input)
 
     Int.prototype._check = function (value) {
         if (!/^\d+$/.test(value))
@@ -256,10 +269,10 @@
 
     // Mobile Input
     function Mobile($input, fieldName, options) {
-        this.constructor.call(this, $input, fieldName, options)
+        _super(Mobile, this)($input, fieldName, options)
     }
 
-    Mobile.prototype = new Input()
+    _inherit(Mobile, Input)
 
     Mobile.prototype._check = function (value) {
         if (!/^1\d{10}$/.test(value))
@@ -267,7 +280,7 @@
         return [true, value]
     }
 
-    var types = {
+    types = {
         str: Str
         , int: Int
         , ascii: ASCII
@@ -275,7 +288,6 @@
         , mobile: Mobile
         , email: Email
     }
-
 
     // main FormCheker class definition
     function FormChecker(element, options) {
@@ -339,14 +351,6 @@
         this.check()
         return this._valid
     }
-
-    String.prototype.kformat || (String.prototype.kformat = function (d) {
-        return this.replace(/%\(([^)]+)\)/g, function(match, name) { 
-            return typeof d[name] != 'undefined'
-                ? d[name]
-                : match
-        })
-    })
 
 
     // exposed to jQuery
