@@ -1,3 +1,14 @@
+/*
+ * jQuery formChecker Plugin
+ * author: gzliyuan
+ * version: June 8, 2013
+ * @requires jQuery v1.4 or later
+ *
+ * Project repository: http://nanny.netease.com/gzliyuan/form-checker
+ *
+ */
+
+
 !function ($) {
 
     var defaultMessages = {
