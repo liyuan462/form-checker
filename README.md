@@ -16,7 +16,7 @@ jQuery formChecker Plugin是一个表单验证的插件，来源于实际的GT�
 
 4. 获取表单验证通过与否
 
-    var isValid = $("#applyform").formChecker("isValid")
+    var isValid = $("form").formChecker("isValid")
 
 ## 选项
 
