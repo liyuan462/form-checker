@@ -366,13 +366,16 @@
 
     // exposed to jQuery
     $.fn.formChecker = function (option) {
+        if (typeof option == 'string') {
+            return this.data('formChecker') && this.data('formChecker')[option]()
+        }
+
         return this.each(function () {
             var $this = $(this)
             , data = $this.data('formChecker')
             , options = typeof option == 'object' && option
 
             if (!data) $this.data('formChecker', (data = new FormChecker(this, options)))
-            if (typeof option == 'string') data[option]()
         })
     }
 
