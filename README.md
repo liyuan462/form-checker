@@ -156,6 +156,20 @@ jQuery formChecker Plugin是一个表单验证的插件，来源于实际的GT�
 
 解释：其中max/min对应'int'型数据大小检查的提示信息，maxLen/minLen对应'str'型数据长度检查的提示信息，blank对应数据为空时的提示信息，callback对应callback选项检查未通过时的提示信息，format对应format选项检查未通过时的提示信息，ascii对应'ascii'检查器检查未通过时的提示信息，chinese对应'chinese'检查器检查未通过时的提示信息，default对应其他情况下的提示信息。每一项的值是一个字符串模板，其中的%(var)会被替换成实际的预定义好的var的值，其中name即formInput中各字段的字段描述，max/min/maxLen/minLen对应设置的大小/长度范围值。
 
+### valueGetter
+
+说明：用于指定获取表单输入元素的值的方式
+
+类型：函数
+
+默认值：输入元素的val()值
+
+解释：输入元素对应的jQuery对象会作为第一个参数传递给valueGetter函数，该函数应该返回一个最终用来验证的值。例如：
+
+    velueGetter: function ($element) {
+        return $element.val()
+    }
+            
 ### fail
 
 说明：用于指定字段验证无效时的行为，一般来说是在界面上显示提示信息。
