@@ -166,7 +166,7 @@ jQuery formChecker Plugin是一个表单验证的插件，来源于实际的GT�
 
 解释：输入元素对应的jQuery对象会作为第一个参数传递给valueGetter函数，该函数应该返回一个最终用来验证的值。例如：
 
-    velueGetter: function ($element) {
+    valueGetter: function ($element) {
         return $element.val()
     }
             
