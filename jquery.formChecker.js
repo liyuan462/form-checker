@@ -21,7 +21,7 @@
         , format: '%(name) 格式有错'
         , ascii: '%(name) 不能包含中文'
         , chinese: '%(name) 必须是中文'
-        , default: '%(name) 格式有错'
+        , 'default': '%(name) 格式有错'
     }
 
     , defaultOptions = {
