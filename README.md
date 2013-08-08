@@ -241,7 +241,7 @@ jQuery formChecker Plugin是一个表单验证的插件，来源于实际的GT�
                 }]
                 , 'select[name="city_id"]': ['城市', 'int', {
                     min: 1
-                    , messages: {blank: '请选择', default: '请选择'}
+                    , messages: {blank: '请选择', 'default': '请选择'}
                 }]
              }
 
