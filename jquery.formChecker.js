@@ -1,7 +1,7 @@
 /*
  * jQuery formChecker Plugin
  * author: gzliyuan
- * version: August 8, 2013
+ * version: August 12, 2013
  * @requires jQuery v1.4 or later
  *
  * Project repository: http://nanny.netease.com/gzliyuan/form-checker
@@ -73,14 +73,14 @@
         
         if (typeof this.options.max == 'number') {
             this._max = this.options.max
-            this._messageVars['max'] = this._max
-            this._messageVars['maxLen'] = this._max
+            this._messageVars.max = this._max
+            this._messageVars.maxLen = this._max
         }
 
         if (typeof this.options.min == 'number') {
             this._min = this.options.min
-            this._messageVars['min'] = this._min
-            this._messageVars['minLen'] = this._min
+            this._messageVars.min = this._min
+            this._messageVars.minLen = this._min
         }
 
         this.options.isBlurCheck && this.$element.blur(function () { that.check() })
@@ -92,7 +92,6 @@
         , message = null
         , value = raw
         , r
-        , valid
         , data
 
         if (value) {
@@ -114,7 +113,7 @@
             valid = true
             validData = value
         } else
-            message = this._messages['blank']
+            message = this._messages.blank
 
         if (message)
             message = kformat(message, this._messageVars)
@@ -171,7 +170,7 @@
         }
 
         if (this._format && !this._format.test(value))
-            return [false, this._messages['format']]
+            return [false, this._messages.format]
         
         return [true, value]
     }
@@ -192,7 +191,7 @@
         var message
 
         if (!/^[\040-\176]*$/.test(value)) {
-            return [false, this._messages['format']]            
+            return [false, this._messages.format]            
         }
 
         if (!this._checkMM(this._length(value))) {
@@ -201,7 +200,7 @@
         }
 
         if (this._format && !this._format.test(value))
-            return [false, this._messages['ascii']]
+            return [false, this._messages.ascii]
         
         return [true, value]
     }
@@ -218,7 +217,7 @@
         var message
 
         if (!/^[\u4E00-\u9FA5]*$/.test(value)) {
-            return [false, this._messages['chinese']]            
+            return [false, this._messages.chinese]            
         }
 
         if (!this._checkMM(this._length(value))) {
@@ -227,7 +226,7 @@
         }
 
         if (this._format && !this._format.test(value))
-            return [false, this._messages['format']]
+            return [false, this._messages.format]
         
         return [true, value]
     }
@@ -266,7 +265,7 @@
 
         value = Number(value)
 
-        if (value === NaN)
+        if (isNaN(value))
             return [false, this._messages['default']]            
         
         if (!this._checkMM(value)) {
@@ -369,7 +368,6 @@
         if (typeof option == 'string') {
             return this.data('formChecker') && this.data('formChecker')[option]()
         }
-
         return this.each(function () {
             var $this = $(this)
             , data = $this.data('formChecker')
