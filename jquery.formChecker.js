@@ -4,8 +4,6 @@
  * version: August 12, 2013
  * @requires jQuery v1.4 or later
  *
- * Project repository: http://nanny.netease.com/gzliyuan/form-checker
- *
  */
 
 
