@@ -1,6 +1,6 @@
 /*
  * jQuery formChecker Plugin
- * author: gzliyuan
+ * author: abyssly <liyuan462@gmail.com>
  * version: August 12, 2013
  * @requires jQuery v1.4 or later
  *
